@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const uniqid = require('uniqid');
+const { debugPort } = require('process');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,6 +30,10 @@ app.get('/api/notes/:id', function (req, res) {
 app.post('/api/notes', (req, res) => {
     let savedNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
     let newNote = req.body;
+
+    newNote.id = uniqid();
+    savedNotes.push(newNote);
+
 
 })
 
