@@ -20,21 +20,16 @@ app.get('/notes', (req, res) => res.sendFile(path.join(__dirname, './public/note
 app.get('./public/assets/js/index.js', (req, res) => res.sendFile(path.join(__dirname, './public/assets/js/index.js')));
 app.get('./public/assets/css/styles.css', (req, res) => res.sendFile(path.join(__dirname, './public/assets/css/styles.css')));
 
-
 app.get('/api/notes', (req, res) => res.json(database));
-
-// app.get('/api/notes/:id', (req, res) => {
-//     let saved = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-//     res.json(saved[Number(req.params.id)]);
-// });
 
 app.post('/api/notes', (req, res) => {
     let newNote = req.body;
 
     newNote.id = uniqid();
     database.push(newNote);
-    fs.writeFile(dataPath, JSON.stringify(database));
+    fs.writeFile(dataPath, JSON.stringify(database), err =>
+    err ? console.log(err) : console.log('Note saved'));
     res.json(newNote);
 });
 
-app.listen(PORT, () => console.log('listening on port ${PORT}'));
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));
