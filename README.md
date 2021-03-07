@@ -22,4 +22,7 @@ This task was quite fun, and I liked learning how to properly use express. In th
 
 ## Deployed application
 
-You can run the application 
+You can run the application [here]( https://enigmatic-ridge-05982.herokuapp.com/)
+
+<img src="Assets/screenshot.png">
+
