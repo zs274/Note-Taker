@@ -16,5 +16,23 @@ app.use(express.json);
 app.get('/', (req, res) => res.sendFile(path.join(main, 'index.html')));
 app.get('/notes', (req, res) => res.sendFile(path.join(main, 'notes.html')));
 
+app.get('/api/notes', function (req, res) {
+    res.sendFile(path.join(__dirname, '/db/db.json'));
+});
 
-app.listen(PORT, () => console.log('listening on port ${PORT}'))
+app.get('/api/notes/:id', function (req, res) {
+    let savedNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+    res.json(savedNotes[Number(req.params.id)]);
+});
+
+app.post('/api/notes', (req, res) => {
+    let savedNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+    let newNote = req.body;
+
+})
+
+
+
+
+app.listen(PORT, () => console.log('listening on port ${PORT}'));
+
